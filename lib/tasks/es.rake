@@ -42,6 +42,7 @@ namespace :es do
     session = GoogleDrive::Session.from_service_account_key('config/service_account.json')
     ws = session.spreadsheet_by_key(ENV['SPREADSHEET_KEY']).worksheets[0]
 
+    ws.delete_rows(1, ws.num_rows)
     events.each.with_index(1) do |event, row|
       event.each.with_index(1) do |value, col|
         ws[row, col] = value
