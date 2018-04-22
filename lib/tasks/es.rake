@@ -43,11 +43,7 @@ namespace :es do
     ws = session.spreadsheet_by_key(ENV['SPREADSHEET_KEY']).worksheets[0]
 
     ws.delete_rows(1, ws.num_rows)
-    events.each.with_index(1) do |event, row|
-      event.each.with_index(1) do |value, col|
-        ws[row, col] = value
-      end
-    end
+    ws.update_cells(1, 1, events)
     ws.save
   end
 end
